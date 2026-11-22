@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Record Management System</title>
+
+</head>
+
+<body>
+
+    <h1>Student Record Management System</h1>
+
+    <hr>
+
+    <h2>Add Student</h2>
+
+    <form action="/add" method="POST">
+
+        Roll Number:
+        <input type="text" name="roll" required>
+        <br><br>
+
+        Name:
+        <input type="text" name="name" required>
+        <br><br>
+
+        Age:
+        <input type="number" name="age" required>
+        <br><br>
+
+        Python Marks:
+        <input type="number" name="python" required>
+        <br><br>
+
+        Mathematics Marks:
+        <input type="number" name="maths" required>
+        <br><br>
+
+        English Marks:
+        <input type="number" name="english" required>
+        <br><br>
+
+        <button type="submit">Add Student</button>
+
+    </form>
+
+    <hr>
+
+    <h2>Search Student</h2>
+
+    <form action="/search" method="POST">
+
+        Roll Number:
+        <input type="text" name="search_roll" required>
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    {% if message %}
+
+        <p>{{ message }}</p>
+
+    {% endif %}
+
+
+    {% if result %}
+
+        <h2>Student Details</h2>
+
+        <p>Roll Number: {{ roll }}</p>
+        <p>Name: {{ result.name }}</p>
+        <p>Age: {{ result.age }}</p>
+
+        <p>Python: {{ result.python }}</p>
+        <p>Mathematics: {{ result.maths }}</p>
+        <p>English: {{ result.english }}</p>
+
+        <p>Total Marks: {{ total }}</p>
+        <p>Percentage: {{ percentage }}%</p>
+        <p>Average: {{ average }}</p>
+
+    {% endif %}
+
+
+    <hr>
+
+    <h2>All Student Records</h2>
+
+    {% if students %}
+
+        {% for roll, student in students.items() %}
+
+            <p>Roll Number: {{ roll }}</p>
+            <p>Name: {{ student.name }}</p>
+            <p>Age: {{ student.age }}</p>
+
+            <p>Python: {{ student.python }}</p>
+            <p>Mathematics: {{ student.maths }}</p>
+            <p>English: {{ student.english }}</p>
+
+            <a href="/delete/{{ roll }}">
+                <button>Delete</button>
+            </a>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No student records available.</p>
+
+    {% endif %}
+
+</body>
+
+</html>
